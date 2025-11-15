@@ -1,0 +1,135 @@
+### nmap ###
+nmap-discovery-fast() {
+nmap -PS21-23,25,53,80,110-111,135,139,143,199,443,445,587,993,995,1025,1720,1723,3306,3389,5900,8080,8888 -PE -PP -PM -PU53,69,111,123,137,161,500,514,520 -sn -T4 -n --max-retries 0 --host-timeout 12 --open -oA nmap-discovery-fast-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-discovery() {
+nmap -PS21-23,25,53,80,110-111,135,139,143,199,443,445,587,993,995,1025,1720,1723,3306,3389,5900,8080,8888 -PE -PP -PM -PU53,69,111,123,137,161,500,514,520 -sn -T4 -n --open -oA nmap-discovery-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-fast() {
+nmap -sV --open -T4 -F -oA nmap-fast-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-fast-no-ping() {
+nmap -sV --open -T4 -F -Pn -oA nmap-fast-no-ping-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-standard() {
+nmap -sV --open -T4 -oA nmap-standard-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-scripts-default() {
+nmap -sV --open -T4 -sC -oA nmap-scripts-default-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-scripts-default-all() {
+nmap -sV --open -T4 -sC -p- -oA nmap-scripts-default-all-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-standard-no-ping() {
+nmap -sV --open -T4 -Pn -oA nmap-standard-no-ping-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-udp-service-scan() {
+nmap -sUV --top-ports 250 -T4 -n -oA nmap-udp-service-scan-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-tcp-service-scan() {
+nmap -sCV --open -Pn -T4 -n -O -A -p- --version-all -oA nmap-full-service-scan-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-smb-enum() {
+nmap -sV --open -T4 -p U:137,T:139,T:445 --script smb-enum-users,smb-enum-shares,smb-os-discovery,smb-security-mode,smb-mbenum,smb-vuln-* -oA nmap-smb-enum-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-smb-enum-no-ping() {
+nmap -sV --open -T4 -p U:137,T:139,T:445 --script smb-enum-users,smb-enum-shares,smb-os-discovery,smb-security-mode,smb-mbenum,smb-vuln-* -Pn -oA nmap-smb-enum-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-http-default() {
+nmap -sV --open -T4 --script http-default-accounts -oA nmap-http-default-%Y_%m_%d-%H_%M_%S $*
+}
+
+nmap-http-default-no-ping() {
+nmap -sV --open -T4 --script http-default-accounts -Pn -oA nmap-http-default-%Y_%m_%d-%H_%M_%S $*
+}
+
+### util
+netntlmparse() {
+	if [ $1 ]
+	then
+		users=$(cat $* | cut -d ":" -f1 | sort -u)
+		for i in $users; do grep $i $* -m 1 --color=never --no-filename | tee -a netntlm_hashes_uniq.txt; done
+		echo "$users" > netntlm_users_uniq.txt
+	else
+		echo "netntlmparse DCE-RPC-NTLMv2-SSP-10.2.1.113.txt SMB-NTLMv2-SSP-10.2.1.123.txt ..."
+	fi
+}
+ldapdomaindumpuserparse() {
+	if [ $1 ]
+	then
+		awk -F '\t' '{ print $3 }' $1 > "domain_users.lst"
+		sed -i 1d domain_users.lst
+	else
+		echo "ldapdomaindumpuserparse domain_users.grep"
+	fi
+}
+# aliases for venvs
+alias kubenumerate="/opt/kubenumerate/venv/bin/python /opt/kubenumerate/kubenumerate.py"
+alias cloud_enum="/opt/cloud_enum/venv/bin/python /opt/cloud_enum/cloud_enum.py"
+alias extensiverolecheck="/opt/kubernetes-rbac-audit/venv/bin/python /opt/kubernetes-rbac-audit/ExtensiveRoleCheck.py"
+# aws
+aws-role-assumer() {
+    # get role information
+    read -p 'enter role arn: ' role_arn
+    read -p 'enter role session name: ' role_session_name
+    read -p 'enter profile to use: ' profile_name
+    # call role assumption
+    temp_role=$(aws sts assume-role --role-arn $role_arn --role-session-name $role_session_name --profile $profile_name)
+    # update aws configuration
+    # export variables
+    export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq -r .Credentials.AccessKeyId)
+    export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
+    export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
+    export AWS_PROFILE=$role_session_name
+    # create new profile in config
+    aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile $role_session_name
+    aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile $role_session_name
+    aws configure set aws_session_token $AWS_SESSION_TOKEN --profile $role_session_name
+}
+aws-role-assumer-with-external-id() {
+    # get role information
+    read -p 'enter role arn: ' role_arn
+    read -p 'enter role session name: ' role_session_name
+    read -p 'enter external id: ' external_id
+    read -p 'enter profile to use: ' profile_name
+    # call role assumption
+    temp_role=$(aws sts assume-role --role-arn $role_arn --role-session-name $role_session_name --profile $profile_name --external-id $external_id)
+    # update aws configuration
+    # export variables
+    export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq -r .Credentials.AccessKeyId)
+    export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
+    export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
+    # create new profile in config
+    aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile $role_session_name
+    aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile $role_session_name
+    aws configure set aws_session_token $AWS_SESSION_TOKEN --profile $role_session_name
+}
+aws-mfa-session() {
+    # get role information
+    read -p 'Enter MFA ARN: ' mfa_arn
+    read -p 'Enter MFA Token: ' token
+    read -p 'Enter Profile to use: ' profile_name
+    # call role assumption
+    session=$(aws sts get-session-token --serial-number $mfa_arn --token-code $token --profile $profile_name)
+    # update aws configuration
+    # export variables
+    export AWS_ACCESS_KEY_ID=$(echo $session | jq -r .Credentials.AccessKeyId)
+    export AWS_SECRET_ACCESS_KEY=$(echo $session | jq -r .Credentials.SecretAccessKey)
+    export AWS_SESSION_TOKEN=$(echo $session | jq -r .Credentials.SessionToken)
+    # create new profile in config
+    aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile mfa
+    aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile mfa
+    aws configure set aws_session_token $AWS_SESSION_TOKEN --profile mfa
+}
