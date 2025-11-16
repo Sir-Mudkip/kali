@@ -29,9 +29,11 @@ RUN sed -i -e 's/# en_GB.UTF-8 UTF-8/en_GB.UTF-8 UTF-8/' /etc/locale.gen && \
 # hide login banner
 RUN touch ~/.hushlogin
 
+COPY Brewfile /
+
 # homebrew
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-RUN /home/linuxbrew/.linuxbrew/bin/brew install $(cat brew-tools | xargs)
+RUN /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/Brewfile 
 RUN /home/linuxbrew/.linuxbrew/bin/brew unlink util-linux
 
 # pip2
@@ -518,4 +520,4 @@ RUN DEBIAN_FRONTEND=noninteractive apt update -y && apt install -y && apt autore
 
 WORKDIR /root
 
-ENTRYPOINT ["/bin/bash", "tmux -f ~/.tmux.conf"]
+CMD /bin/bash
