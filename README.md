@@ -26,10 +26,10 @@ comes with my own personal keybinds and plugins for neovim and tmux. I will like
 ### Installing:
 
 ```bash
-docker pull [IMAGE NAME]
+docker pull ghcr.io/sir-mudkip/kali:latest
 ```
 ```bash
-sudo podman pull [IMAGE NAME]
+sudo podman pull ghcr.io/sir-mudkip/kali:latest
 ```
 
 ### Alias:
@@ -43,7 +43,7 @@ sudo podman run \
     --network host \
     --privileged \
     -v $HOME:/run/host \
-    [IMAGE NAME]
+    ghcr.io/sir-mudkip/kali:latest
 ```
 
 - If using docker, replace the podman command with docker (make sure to run as sudo!)
@@ -60,14 +60,16 @@ command before the image name.
 I don't recommend using hashcat in this container as it's already quite big. I have an ongoing
 project which will seek to make a hashcat container more usable.
 
-ALSO! This container does not contain the metasploit framework as there's issues with containers and
-systemctl. You can download a python script that will provide you with emulation, or you can mess
+ALSO! msfconsole doesn't work in this as there's issues with containers and
+systemctl in trying to get it to work. You can download a python script that will provide you with emulation, or you can mess
 with the Dockerfile. However, it's very finicky to get it to work. The create of Snotra has also got
 a container which you can pull down for metasploit, OR you can dockerise it yourself from the Rapid7
 github (I'd suggest the former due to the aliases provided):
 
 - https://gitlab.com/snotra.uk/containers/metasploit-framework/-/tree/master?ref_type=heads
 - https://github.com/rapid7/metasploit-framework/blob/master/Dockerfile
+
+Other metasploit utilities such as msfvenom are available will work.
 
 ### Updates:
 
