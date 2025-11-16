@@ -7,35 +7,29 @@ you'd likely use for pentesting of web apps, cloud, networks, and some wireless 
 
 ### Credit:
 
-I did not build the structure to this container file. The credit must go to my colleuge and
-cloud hacking guru ["Shaunography"](https://gitlab.com/shaunography), creator of Snotra, please find the links below:
+I did not build the structure to this container file. The credit must go to my colleague and
+cloud hacking guru ["Shaunography"](https://gitlab.com/shaunography), creator of Snotra. Please find the links below:
 
 - https://snotra.uk/
 - https://gitlab.com/snotra.uk
 - https://gitlab.com/snotra.cloud
 
-This is just a project of mine that I want to do to get used to making some dockerfiles and using
-github. I have added a few of my own tools to this that I tend to use on a more frequent basis such
-as:
+This is just a project of mine that I want to do to get used to making some Dockerfiles, modifying them, and using
+github actions workflows for CI/CD. I have added a few of my own tools to this that I tend to use on a more frequent basis such as:
 - testssl
 - NoPrompt
 - Linkedin-dumper
 
 There's a few more I'm not thinking of but those are the main ones that come to mind. This also
-comes with my own personal keybinds and plugins for neovim and tmux.
+comes with my own personal keybinds and plugins for neovim and tmux. I will likely change the container a little bit as new tools come out
+
 ### Installing:
 
-This can be done in a few different ways.
-
-1) Clone the repository and build the file locally:
-
-```bash
-git clone https://Sir-Mudkip/kali.git
-```
-
-2) Pull the repository from GitLab:
 ```bash
 docker pull [IMAGE NAME]
+```
+```bash
+sudo podman pull [IMAGE NAME]
 ```
 
 ### Alias:
@@ -59,10 +53,9 @@ sudo podman run \
 - To enable GPU passthrough and use hashcat in the container, then add `--gpus all \` into the
 command before the image name.
 
-> [!important] GPU Passthru
-> To use GPUs in a container, you will need the Nvidia drivers, the CUDA toolkit, and the Nvidias
-> container toolkit to enable GPU passthru. Thankfully you will only need the drivers, the CUDA
-> toolkit can be installed in the container and if you enable passthru it should just work.
+> [!note] GPU Passthru
+> To use tools like hashcat in this container, you will need the Nvidia drivers, the CUDA toolkit, and the Nvidias container toolkit to enable GPU passthru. Thankfully you will only need the drivers, and the container toolkit locally.The CUDA toolkit can be installed in the container and if you enable passthru it should just work.
+> If you don't want the toolkit feel free to take it out. I personally would suggest a dedicated hashcat image which is a WIP for myself.
 
 I don't recommend using hashcat in this container as it's already quite big. I have an ongoing
 project which will seek to make a hashcat container more usable.
