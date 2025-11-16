@@ -5,7 +5,6 @@ ENV LANG=en_GB.UTF-8
 
 COPY ./config/bashrc /root/.bashrc
 COPY ./config/aliases /root/.bashrc.d/
-COPY ./config/bash-color-prompt.sh /etc/profile.d/
 COPY ./config/nvim /root/.config/nvim
 COPY ./config/tmux.conf /root/.tmux.conf
 COPY ./config/tmux/ /root/.tmux/
@@ -31,12 +30,49 @@ RUN touch ~/.hushlogin
 
 # homebrew
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-RUN /home/linuxbrew/.linuxbrew/bin/brew install $(cat brew-tools | xargs)
+RUN /home/linuxbrew/.linuxbrew/bin/brew install fzf
+RUN /home/linuxbrew/.linuxbrew/bin/brew install awscli
+RUN /home/linuxbrew/.linuxbrew/bin/brew install kubectl
+RUN /home/linuxbrew/.linuxbrew/bin/brew install krew
+RUN /home/linuxbrew/.linuxbrew/bin/brew install gitleaks
+RUN /home/linuxbrew/.linuxbrew/bin/brew install trufflehog
+RUN /home/linuxbrew/.linuxbrew/bin/brew install checkov
+RUN /home/linuxbrew/.linuxbrew/bin/brew install prowler
+RUN /home/linuxbrew/.linuxbrew/bin/brew install cloudsplaining
+RUN /home/linuxbrew/.linuxbrew/bin/brew install azure-cli
+RUN /home/linuxbrew/.linuxbrew/bin/brew install scoutsuite
+RUN /home/linuxbrew/.linuxbrew/bin/brew install trivy
+RUN /home/linuxbrew/.linuxbrew/bin/brew install grype
+RUN /home/linuxbrew/.linuxbrew/bin/brew install nuclei
+RUN /home/linuxbrew/.linuxbrew/bin/brew install cloudfox
+RUN /home/linuxbrew/.linuxbrew/bin/brew install git
+RUN /home/linuxbrew/.linuxbrew/bin/brew install golang
+RUN /home/linuxbrew/.linuxbrew/bin/brew install jq
+RUN /home/linuxbrew/.linuxbrew/bin/brew install xq
+RUN /home/linuxbrew/.linuxbrew/bin/brew install curl
 RUN /home/linuxbrew/.linuxbrew/bin/brew unlink util-linux
+RUN /home/linuxbrew/.linuxbrew/bin/brew install wget2
+RUN /home/linuxbrew/.linuxbrew/bin/brew install unzip
+RUN /home/linuxbrew/.linuxbrew/bin/brew install noseyparker
+RUN /home/linuxbrew/.linuxbrew/bin/brew install zsh-completion
+RUN /home/linuxbrew/.linuxbrew/bin/brew install zizmor
+RUN /home/linuxbrew/.linuxbrew/bin/brew install node
+RUN /home/linuxbrew/.linuxbrew/bin/brew install azqr
+RUN /home/linuxbrew/.linuxbrew/bin/brew install testssl
+RUN /home/linuxbrew/.linuxbrew/bin/brew install tmux
+RUN /home/linuxbrew/.linuxbrew/bin/brew install ripgrep
 
 # pip2
 RUN wget -q https://bootstrap.pypa.io/pip/2.7/get-pip.py && \
     python2 get-pip.py
+
+# john
+RUN git clone https://github.com/openwall/john -b bleeding-jumbo /opt/john
+WORKDIR /opt/john/src
+RUN /opt/john/src/configure && \
+    make -s clean && \
+    make -sj4 && \
+    echo "alias john=\"/opt/john/run/john\"" > /root/.bashrc.d/john.rc
 
 WORKDIR /opt/
 # seth
@@ -514,8 +550,8 @@ RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/postgres-b
 RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/vnc-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/vnc-betterdefaultpasslist_spaces.txt
 RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist_spaces.txt
 
-RUN DEBIAN_FRONTEND=noninteractive apt update -y && apt install -y && apt autoremove && apt autoclean
+RUN DEBIAN_FRONTEND=noninteractive apt update -y && apt install -y
 
 WORKDIR /root
 
-ENTRYPOINT ["/bin/bash", "tmux -f ~/.tmux.conf"]
+CMD /bin/bash

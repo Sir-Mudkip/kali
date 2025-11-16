@@ -19,6 +19,7 @@ chisel
 coercer
 cowpatty
 crowbar
+crunch
 default-mysql-client
 dirb
 dnschef
@@ -63,6 +64,7 @@ ligolo-ng
 locales
 macchanger
 man
+metasploit-framework
 medusa
 mimikatz
 mingw-w64
@@ -76,6 +78,7 @@ nfs-common
 nikto
 nishang
 nmap
+neovim
 ntpsec-ntpdate
 odat
 open-iscsi
@@ -148,4 +151,3 @@ groff-base
 build-essential
 file
 wpscan
-chromium-chromedriver
