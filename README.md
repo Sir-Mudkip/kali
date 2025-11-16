@@ -26,7 +26,7 @@ comes with my own personal keybinds and plugins for neovim and tmux. I will like
 I've also changed a few things to make the file more pullable such as a dedicate brewfile for brew installs. I will try make more optimisatons in future to reduce the number of layers and if I can install something via brew then I will to avoid the packages conflicting with system packages like in `apt`.
 The other thing to note is that I also removed John the Ripper for password cracking as I have a separate container containing hashcat with dedicated GPU Passthru. Hashcat should be installed however if you want to use it.
 
-### Installing:
+### Install:
 
 ```bash
 docker pull ghcr.io/sir-mudkip/kali:latest
@@ -39,7 +39,8 @@ sudo podman pull ghcr.io/sir-mudkip/kali:latest
 
 I suggest that you run the following command to run the container:
 ```bash
-sudo podman run \
+kali() {
+    sudo podman run \
     -it \
     --rm \
     --security-opt label=disable \
@@ -47,6 +48,7 @@ sudo podman run \
     --privileged \
     -v $HOME:/run/host \
     ghcr.io/sir-mudkip/kali:latest
+}
 ```
 
 - If using docker, replace the podman command with docker (make sure to run as sudo!)
