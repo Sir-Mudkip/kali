@@ -7,8 +7,8 @@ you'd likely use for pentesting of web apps, cloud, networks, and some wireless 
 
 ### Credit:
 
-I did not build the structure to this container file. Most of the credit must go to my colleuge and
-cloud hacking guru @Shaunography, creator of Snotra, please find the links below:
+I did not build the structure to this container file. The credit must go to my colleuge and
+cloud hacking guru ["Shaunography"](https://gitlab.com/shaunography), creator of Snotra, please find the links below:
 
 - https://snotra.uk/
 - https://gitlab.com/snotra.uk
