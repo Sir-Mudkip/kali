@@ -1,6 +1,6 @@
 ## Overview
 
-This is a Kali container with almost every tool I can think of. This includes of your general tools
+This is a Kali container with almost every tool I can think of. This includes most of your general tools
 you'd likely use for pentesting of web apps, cloud, networks, and some wireless support.
 
 ***Please do not use this container for destructive or illegal activities!!!!***
@@ -21,7 +21,10 @@ github actions workflows for CI/CD. I have added a few of my own tools to this t
 - Linkedin-dumper
 
 There's a few more I'm not thinking of but those are the main ones that come to mind. This also
-comes with my own personal keybinds and plugins for neovim and tmux. I will likely change the container a little bit as new tools come out
+comes with my own personal keybinds and plugins for neovim and tmux. I will likely change the container a little bit as new tools come out. 
+
+I've also changed a few things to make the file more pullable such as a dedicate brewfile for brew installs. I will try make more optimisatons in future to reduce the number of layers and if I can install something via brew then I will to avoid the packages conflicting with system packages like in `apt`.
+The other thing to note is that I also removed John the Ripper for password cracking as I have a separate container containing hashcat with dedicated GPU Passthru. Hashcat should be installed however if you want to use it.
 
 ### Installing:
 
