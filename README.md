@@ -58,9 +58,9 @@ kali() {
 - To enable GPU passthrough and use hashcat in the container, then add `--gpus all \` into the
 command before the image name.
 
-> [!note] GPU Passthru
-> To use tools like hashcat in this container, you will need the Nvidia drivers, the CUDA toolkit, and the Nvidias container toolkit to enable GPU passthru. Thankfully you will only need the drivers, and the container toolkit locally.The CUDA toolkit can be installed in the container and if you enable passthru it should just work.
-> If you don't want the toolkit feel free to take it out. I personally would suggest a dedicated hashcat image which is a WIP for myself.
+> [!NOTE] GPU
+> To use tools like hashcat in this container, you will need the Nvidia drivers and the Nvidias container toolkit to enable GPU passthru. The CUDA toolkit can be installed in the container and if you enable passthru it should just work.
+> I have not included the toolkit to save space and efficiency, though if you would like to include it you can go [here](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Debian&target_version=12&target_type=deb_local) and build a RUN layer for each of the steps here. I personally would suggest a dedicated hashcat image which is a WIP for myself.
 
 I don't recommend using hashcat in this container as it's already quite big. I have an ongoing
 project which will seek to make a hashcat container more usable.
