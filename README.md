@@ -74,10 +74,10 @@ github (I'd suggest the former due to the aliases provided):
 - https://gitlab.com/snotra.uk/containers/metasploit-framework/-/tree/master?ref_type=heads
 - https://github.com/rapid7/metasploit-framework/blob/master/Dockerfile
 
-Other metasploit utilities such as msfvenom are available will work.
+Other metasploit utilities such as msfvenom are available and will work.
 
 ### Updates:
 
-This is very much projects I tend to complete in my own time. If I have any updates they will be
+This is very much a project I tend to work on in my own time. If I have any updates they will be
 provided whenever I finish them. I will also be trying to set up a GitHub actions workflow to allow
 a push to here whenever I change anything.
