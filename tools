@@ -64,7 +64,6 @@ ligolo-ng
 locales
 macchanger
 man
-metasploit-framework
 medusa
 mimikatz
 mingw-w64
@@ -105,9 +104,11 @@ python3-pip
 python3-pyfiglet
 python3-pypykatz
 python3-venv
+python3-pywerview
 reaver
 redis-tools
 responder
+recon-ng
 ridenum
 rlwrap
 rpcbind

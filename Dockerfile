@@ -44,6 +44,14 @@ WORKDIR /opt/
 # seth
 RUN git clone https://github.com/SySS-Research/Seth
 
+# john the ripper
+RUN git clone https://github.com/openwall/john -b bleeding-jumbo /opt/john
+WORKDIR /opt/john/src
+RUN /opt/john/src/configure && \
+    make -s clean && \
+    make -sj4 && \
+    echo "alias john=\"/opt/john/run/john\"" > /root/.bashrc.d/john.rc
+
 # sccmhunter
 RUN git clone https://github.com/garrettfoster13/sccmhunter /opt/sccmhunter && \
     python3 -m venv /opt/sccmhunter/venv && \
