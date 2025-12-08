@@ -69,12 +69,6 @@ RUN git clone https://github.com/ImpostorKeanu/eavesarp /opt/eavesarp && \
     /opt/eavesarp/venv/bin/pip install -r /opt/eavesarp/requirements.txt && \
     echo "alias eavesarp=\"/opt/eavesarp/venv/bin/python /opt/eavesarp/eavesarp.py\"" > /root/.bashrc.d/eavesarp.rc
 
-# pywerview
-RUN git clone https://github.com/the-useless-one/pywerview /opt/pywerview && \
-    python3 -m venv /opt/pywerview/venv && \
-    /opt/pywerview/venv/bin/pip install /opt/pywerview/ && \
-    install -o root -g root -m 0755 /opt/pywerview/venv/bin/pywerview /usr/local/bin/pywerview
-
 # netexec
 RUN git clone https://github.com/Pennyw0rth/NetExec /opt/NetExec && \
     python3 -m venv /opt/NetExec/venv && \
@@ -516,13 +510,13 @@ RUN /home/linuxbrew/.linuxbrew/bin/nuclei -ut
 RUN git clone https://github.com/insidetrust/statistically-likely-usernames /usr/share/statistically-likely-usernames
 
 # prep wordlist files for msf usage
-RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/mssql-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/mssql-betterdefaultpasslist_spaces.txt
-RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/mysql-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/mysql-betterdefaultpasslist_spaces.txt
-RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/ssh-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/ssh-betterdefaultpasslist_spaces.txt
-RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/ftp-betterdefaultpasslist_spaces.txt
-RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/postgres-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/postgres-betterdefaultpasslist_spaces.txt
-RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/vnc-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/vnc-betterdefaultpasslist_spaces.txt
-RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist_spaces.txt
+RUN sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/mssql-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/mssql-betterdefaultpasslist_spaces.txt && \
+    sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/mysql-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/mysql-betterdefaultpasslist_spaces.txt && \
+    sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/ssh-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/ssh-betterdefaultpasslist_spaces.txt && \
+    sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/ftp-betterdefaultpasslist_spaces.txt && \
+    sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/postgres-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/postgres-betterdefaultpasslist_spaces.txt && \
+    sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/vnc-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/vnc-betterdefaultpasslist_spaces.txt && \ 
+    sed -e "s/:/ /" /usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist.txt > /usr/share/seclists/Passwords/Default-Credentials/tomcat-betterdefaultpasslist_spaces.txt
 
 RUN DEBIAN_FRONTEND=noninteractive apt update -y && apt install -y && apt autoremove && apt autoclean
 
