@@ -8,6 +8,5 @@ DEBIAN_FRONTEND=noninteractive apt -y install \
     $(cat tools | xargs)
 rm -rd /var/lib/apt/lists/*
 
-./20-brew.sh
-./30-git-installs.sh
-./60-update-and-clean.sh
+/build_files/20-brew.sh
+/build_files/30-git-installs.sh

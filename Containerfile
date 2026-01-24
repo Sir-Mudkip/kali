@@ -14,17 +14,22 @@ COPY build_files /build_files
 RUN --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /build/10-packages.sh
+    /build_files/10-tools.sh
 
 RUN --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /build/40-packages.sh
+    /build_files/40-wordlist.sh
 
 RUN --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /build/50-packages.sh
+    /build_files/50-config.sh
+
+RUN --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /build_files/60-update-and-clean.sh
 
 WORKDIR /root
 CMD /sbin/init
