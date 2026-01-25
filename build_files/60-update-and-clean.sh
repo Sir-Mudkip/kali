@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 # clean.sh - Simple safe cleanup script
 # Only removes caches and temporary files that are safe to delete
 
@@ -14,7 +14,6 @@ echo "======================================================"
 echo " Updating Container - Ensure APT and Brew are updated "
 echo "======================================================"
 apt update && apt upgrade -y
-brew update
 
 # =============================================================================
 # REMOVE KALI REPOSITORIES (if present)

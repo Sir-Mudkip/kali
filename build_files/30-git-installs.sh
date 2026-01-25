@@ -227,7 +227,7 @@ echo "alias jwt_tool=\"python3 /opt/jwt_tool/jwt_tool.py\"" > /root/.bashrc.d/jw
 git clone https://github.com/l4rm4nd/LinkedInDumper /opt/linkedin-dumper
 python3 -m venv /opt/linkedin-dumper/venv
 /opt/linkedin-dumper/venv/bin/pip install --no-cache-dir --no-cache-dir -r /opt/linkedin-dumper/requirements.txt
-echo "alias linkedin-dumper=\"/opt/linkedin-dumper/venv/bin/python /opt/linkedin-dumper/linkedindumper.py" > /root/.bashrc.d/linkedin-dumper.rc
+echo "alias linkedin-dumper=\"/opt/linkedin-dumper/venv/bin/python /opt/linkedin-dumper/linkedindumper.py\"" > /root/.bashrc.d/linkedin-dumper.rc
 
 # NoPrompt
 git clone "https://github.com/NotSoSecure/NoPrompt" /opt/NoPrompt
@@ -311,7 +311,7 @@ python3 -m venv /opt/kubenumerate/venv
 /opt/kubenumerate/venv/bin/pip install --no-cache-dir -r /opt/kubenumerate/requirements.txt
 echo "alias kubenumerate=\"/opt/kubenumerate/venv/bin/python /opt/kubenumerate/kubenumerate.py\"" > /root/.bashrc.d/kubenumerate.rc
 
-# cloud_enum
+# loud_enum
 git clone "https://github.com/initstring/cloud_enum" /opt/cloud_enum
 python3 -m venv /opt/cloud_enum/venv
 /opt/cloud_enum/venv/bin/pip install --no-cache-dir /opt/cloud_enum/
@@ -374,16 +374,10 @@ echo "alias gcp-permissions-checker=\"/opt/gcp-permissions-checker/venv/bin/pyth
 
 # cloudsploit
 git clone "http://github.com/aquasecurity/cloudsploit.git" /opt/cloudsploit
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-/home/linuxbrew/.linuxbrew/bin/npm install
+cd /opt/cloudsploit
+npm install
 chmod +x /opt/cloudsploit/index.js
-
-# kics
-git clone "https://github.com/Checkmarx/kics.git" /opt/kics
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-/home/linuxbrew/.linuxbrew/bin/go mod vendor
-make build
-install -o root -g root -m 0755 /opt/kics/bin/kics /usr/local/bin/kics
+echo "alias cloudsploit=\"/bin/bash /opt/cloudsploit/index.js\"" > /root/.bashrc.d/cloudsploit.rc
 
 # sharefiltrator
 git clone "https://github.com/Friends-Security/sharefiltrator" /opt/sharefiltrator
