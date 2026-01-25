@@ -83,6 +83,9 @@ rm -rf /var/lib/gems/*/cache 2>/dev/null || true
 rm -rf /root/.npm 2>/dev/null || true
 rm -rf /home/*/.npm 2>/dev/null || true
 
+# Remove Build Files Dir
+rm -rf /build_files
+
 echo "  ✓ Build tool caches cleaned"
 
 # =============================================================================

@@ -18,6 +18,7 @@ coercer
 cowpatty
 crowbar
 crunch
+curl
 default-mysql-client
 dirb
 dnschef
@@ -58,6 +59,7 @@ libnss-myhostname
 libssl-dev
 ligolo-ng
 locales
+macchanger
 man
 medusa
 metasploit-framework
@@ -112,6 +114,7 @@ spray
 spraykatz
 sshuttle
 swaks
+telnet
 tesseract-ocr
 tftp-hpa
 thc-ipv6
