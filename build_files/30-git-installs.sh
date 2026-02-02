@@ -4,7 +4,7 @@ set -eoux pipefail
 
 # Testssl
 git clone --depth 1 https://github.com/testssl/testssl.sh.git --branch 3.3dev /opt/testssl
-chmod+x /opt/testssl/testssl.sh
+chmod +x /opt/testssl/testssl.sh
 echo "alias testssl=\"/opt/testssl/testssl.sh\"" > .bashrc.d/testssl.rc
 
 # pip2
