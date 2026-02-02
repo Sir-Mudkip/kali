@@ -19,8 +19,4 @@ touch ~/.hushlogin
 # Ignore case on tab completion
 echo "set completion ignore-case On" >> /etc/inputrc
 
-# Brew and Manual Installs
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-
-/build_files/20-brew.sh
 /build_files/30-git-installs.sh

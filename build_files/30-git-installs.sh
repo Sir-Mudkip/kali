@@ -207,16 +207,6 @@ python3 -m venv /opt/jexboss/venv
 /opt/jexboss/venv/bin/pip install --no-cache-dir -r /opt/jexboss/requires.txt
 echo "alias jexboss=\"python3 /opt/jexboss/jexboss.py\"" > /root/.bashrc.d/jexboss.rc
 
-# o365enum
-git clone https://github.com/gremwell/o365enum /opt/o365enum
-echo "alias o365enum=\"python3 /opt/o365enum/o365enum.py\"" > /root/.bashrc.d/o365enum.rc
-
-# rsh
-git clone https://github.com/mzfr/rsh /opt/rsh
-python3 -m venv /opt/rsh/venv
-/opt/rsh/venv/bin/pip install --no-cache-dir -r /opt/rsh/requirements.txt
-echo "alias rsh=\"python3 /opt/rsh/rsh\"" > /root/.bashrc.d/rsh.rc
-
 # jwt_tool
 git clone https://github.com/ticarpi/jwt_tool /opt/jwt_tool
 python3 -m venv /opt/jwt_tool/venv
@@ -235,188 +225,11 @@ python3 -m venv /opt/NoPrompt/venv
 /opt/NoPrompt/venv/bin/pip install --no-cache-dir -r /opt/NoPrompt/requirements.txt
 echo "alias noprompt=\"/opt/NoPrompt/venv/bin/python /opt/NoPrompt/noprompt.py\"" > /root/.bashrc.d/noprompt.rc
 
-# sharpcollection
-git clone https://github.com/Flangvik/SharpCollection /opt/SharpCollection
-
-# brutespray
-/home/linuxbrew/.linuxbrew/bin/go install github.com/x90skysn3k/brutespray@latest
-
-# aws session manager plugin
-curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "/opt/session-manager-plugin.deb"
-dpkg -i /opt/session-manager-plugin.deb
-
-# kubesec-scan
-/home/linuxbrew/.linuxbrew/bin/kubectl-krew install kubesec-scan
-
-# access_matrix
-/home/linuxbrew/.linuxbrew/bin/kubectl-krew install access-matrix 
-
-# score
-/home/linuxbrew/.linuxbrew/bin/kubectl-krew install score
-
-# roadtools
-python3 -m venv /opt/ROADTools/venv
-/opt/ROADTools/venv/bin/pip install --no-cache-dir roadlib
-/opt/ROADTools/venv/bin/pip install --no-cache-dir roadrecon
-install -o root -g root -m 0755 /opt/ROADTools/venv/bin/roadrecon /usr/local/bin/roadrecon
-install -o root -g root -m 0755 /opt/ROADTools/venv/bin/roadrecon-gui /usr/local/bin/roadrecon-gui
-
-# pmapper
-git clone "https://github.com/mosesrenegade/PMapper" /opt/PMapper
-python3 -m venv /opt/PMapper/venv
-/opt/PMapper/venv/bin/pip install --no-cache-dir /opt/PMapper/
-install -o root -g root -m 0755 /opt/PMapper/venv/bin/pmapper /usr/local/bin/pmapper
-
-# pacu
-git clone https://github.com/RhinoSecurityLabs/pacu /opt/pacu
-python3 -m venv /opt/pacu/venv
-/opt/pacu/venv/bin/pip3 install -U /opt/pacu
-install -o root -g root -m 0755 /opt/pacu/venv/bin/pacu /usr/local/bin/pacu
-
-# s3-account-search
-python3 -m venv /opt/s3-account-search/venv
-/opt/s3-account-search/venv/bin/pip install --no-cache-dir s3-account-search
-install -o root -g root -m 0755 /opt/s3-account-search/venv/bin/s3-account-search /usr/local/bin/s3-account-search
-
-# iamactionhunter
-python3 -m venv /opt/IAMActionHunter/venv
-/opt/IAMActionHunter/venv/bin/pip install --no-cache-dir iamactionhunter
-install -o root -g root -m 0755 /opt/IAMActionHunter/venv/bin/iamactionhunter /usr/local/bin/iamactionhunter
-
-# az powershell
-pwsh -c "Install-Module -Name Az -Repository PSGallery -Force"
-
-# ms graph powershell
-pwsh -c "Install-Module -Name Microsoft.Graph -Repository PSGallery -Force"
-
-# blackcat
-git clone "https://github.com/azurekid/blackcat" /opt/blackcat
-
-# aws enumerator
-GOPATH=/opt/aws-enumerator /home/linuxbrew/.linuxbrew/bin/go install -v github.com/shabarkin/aws-enumerator@latest
-ln -s /opt/aws-enumerator/bin/aws-enumerator /usr/bin/aws-enumerator
-
-# GoAWSConsoleSpray
-GOPATH=/opt/GoAWSConsoleSpray /home/linuxbrew/.linuxbrew/bin/go install github.com/WhiteOakSecurity/GoAWSConsoleSpray@latest
-ln -s /opt/GoAWSConsoleSpray/bin/GoAWSConsoleSpray /usr/bin/GoAWSConsoleSpray
-
-# kubernetes-rbac-audit
-git clone "https://github.com/PalindromeLabs/kubernetes-rbac-audit" /opt/kubernetes-rbac-audit
-python3 -m venv /opt/kubernetes-rbac-audit/venv
-/opt/kubernetes-rbac-audit/venv/bin/pip install --no-cache-dir colorama
-
-# kubenumerate
-git clone "https://github.com/0x5ubt13/kubenumerate" /opt/kubenumerate
-python3 -m venv /opt/kubenumerate/venv
-/opt/kubenumerate/venv/bin/pip install --no-cache-dir -r /opt/kubenumerate/requirements.txt
-echo "alias kubenumerate=\"/opt/kubenumerate/venv/bin/python /opt/kubenumerate/kubenumerate.py\"" > /root/.bashrc.d/kubenumerate.rc
-
-# loud_enum
-git clone "https://github.com/initstring/cloud_enum" /opt/cloud_enum
-python3 -m venv /opt/cloud_enum/venv
-/opt/cloud_enum/venv/bin/pip install --no-cache-dir /opt/cloud_enum/
-install -o root -g root -m 0755 /opt/cloud_enum/venv/bin/cloud_enum /usr/local/bin/cloud_enum
-
-# azure kubelogin
-/home/linuxbrew/.linuxbrew/bin/az aks install-cli
-
-# kubiscan
-git clone "https://github.com/cyberark/KubiScan" /opt/KubiScan
-python3 -m venv /opt/KubiScan/venv
-/opt/KubiScan/venv/bin/pip install --no-cache-dir -r /opt/KubiScan/requirements.txt
-echo "alias KubiScan=\"/opt/KubiScan/venv/bin/python /opt/KubiScan/KubiScan.py\"" > /root/.bashrc.d/KubiScan.rc
-
-# graphpython
-git clone "https://github.com/mlcsec/Graphpython" /opt/Graphpython
-python3 -m venv /opt/Graphpython/venv
-/opt/Graphpython/venv/bin/pip install --no-cache-dir /opt/Graphpython/
-install -o root -g root -m 0755 /opt/Graphpython/venv/bin/Graphpython /usr/local/bin/Graphpython
-
-# kubeaudit
-/home/linuxbrew/.linuxbrew/bin/wget2 "https://github.com/Shopify/kubeaudit/releases/download/v0.22.1/kubeaudit_0.22.1_linux_amd64.tar.gz" -O /opt/kubeaudit_0.22.1_linux_amd64.tar.gz
-tar -xzf /opt/kubeaudit_0.22.1_linux_amd64.tar.gz -C /opt/
-install -o root -g root -m 0755 /opt/kubeaudit /usr/local/bin/kubeaudit
-rm /opt/kubeaudit_0.22.1_linux_amd64.tar.gz
-rm /opt/kubeaudit
-
-# nodeshell
-/home/linuxbrew/.linuxbrew/bin/kubectl-krew install node-shell
-install -o root -g root -m 0755 $HOME/.krew/bin/kubectl-node_shell /usr/local/bin/kubectl-node_shell
-
-# gcloud
-curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz -o /opt/google-cloud-cli-linux-x86_64.tar.gz
-tar -xf /opt/google-cloud-cli-linux-x86_64.tar.gz -C /opt/
-/opt/google-cloud-sdk/install.sh -q
-/opt/google-cloud-sdk/bin/gcloud components install gke-gcloud-auth-plugin
-
-# iam policy visualize
-git clone "https://github.com/hac01/iam-policy-visualize" /opt/iam-policy-visualize
-python3 -m venv /opt/iam-policy-visualize/venv
-/opt/iam-policy-visualize/venv/bin/pip install --no-cache-dir graphviz
-echo "alias iam-policy-visualize=\"/opt/iam-policy-visualize/venv/bin/python /opt/iam-policy-visualize/main.py\"" > /root/.bashrc.d/iam-policy-visualize.rc
-
-# gcp iam priv esc
-git clone "https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation" /opt/GCP-IAM-Privilege-Escalation
-python3 -m venv /opt/GCP-IAM-Privilege-Escalation/venv
-/opt/GCP-IAM-Privilege-Escalation/venv/bin/pip install --no-cache-dir -r /opt/GCP-IAM-Privilege-Escalation/PrivEscScanner/requirements.txt
-
-# gcp-iam-brute
-git clone "https://github.com/hac01/gcp-iam-brute" /opt/gcp-iam-brute
-python3 -m venv /opt/gcp-iam-brute/venv
-/opt/gcp-iam-brute/venv/bin/pip install --no-cache-dir -r /opt/gcp-iam-brute/requirements.txt
-echo "alias gcp-iam-brute=\"/opt/gcp-iam-brute/venv/bin/python /opt/gcp-iam-brute/main.py\"" > /root/.bashrc.d/gcp-iam-brute.rc
-
-# gcp-permissions-checker
-git clone "https://github.com/egre55/gcp-permissions-checker" /opt/gcp-permissions-checker
-python3 -m venv /opt/gcp-permissions-checker/venv
-/opt/gcp-permissions-checker/venv/bin/pip install --no-cache-dir -r /opt/gcp-permissions-checker/requirements.txt
-echo "alias gcp-permissions-checker=\"/opt/gcp-permissions-checker/venv/bin/python /opt/gcp-permissions-checker/main.py\"" > /root/.bashrc.d/gcp-permissions-checker.rc
-
-# cloudsploit
-git clone "http://github.com/aquasecurity/cloudsploit.git" /opt/cloudsploit
-cd /opt/cloudsploit
-npm install
-chmod +x /opt/cloudsploit/index.js
-echo "alias cloudsploit=\"/bin/bash /opt/cloudsploit/index.js\"" > /root/.bashrc.d/cloudsploit.rc
-
-# sharefiltrator
-git clone "https://github.com/Friends-Security/sharefiltrator" /opt/sharefiltrator
-python3 -m venv /opt/sharefiltrator/venv
-/opt/sharefiltrator/venv/bin/pip install --no-cache-dir -r /opt/sharefiltrator/requirements.txt
-echo "alias sharefiltrator=\"/opt/sharefiltrator/venv/bin/python /opt/sharefiltrator/sharefiltrator.py\"" > /root/.bashrc.d/sharefiltrator.rc
-
-# noCAP
-git clone "https://github.com/securesloth/noCAP" /opt/noCAP
-python3 -m venv /opt/noCAP/venv
-/opt/noCAP/venv/bin/pip install --no-cache-dir -r /opt/noCAP/requirements.txt
-echo "alias noCAP=\"/opt/noCAP/venv/bin/python /opt/noCAP/noCAP.py\"" > /root/.bashrc.d/noCAP.rc
-
 # caReports
 git clone "https://github.com/uniQuk/caReports" /opt/caReports
 
 # CAPs
 git clone "https://github.com/techBrandon/CAPs" /opt/CAPs
-
-# EntraFalcon
-git clone "https://github.com/CompassSecurity/EntraFalcon" /opt/EntraFalcon
-
-# snotra aws
-git clone "https://gitlab.com/snotra.cloud/aws.git" /opt/snotra_aws
-python3 -m venv /opt/snotra_aws/venv
-/opt/gcp-iam-brute/venv/bin/pip install --no-cache-dir -r /opt/snotra_aws/requirements.txt
-echo "alias snotra_aws=\"/opt/snotra_aws/venv/bin/python /opt/snotra_aws/snorta.py\"" > /root/.bashrc.d/snotra.rc
-
-# snotra azure
-git clone "https://gitlab.com/snotra.cloud/azure.git" /opt/snotra_azure
-python3 -m venv /opt/snotra_azure/venv
-/opt/gcp-iam-brute/venv/bin/pip install --no-cache-dir -r /opt/snotra_azure/requirements.txt
-echo "alias snotra_azure=\"/opt/snotra_azure/venv/bin/python /opt/snotra_azure/snorta.py\"" >> /root/.bashrc.d/snotra.rc
-
-# snotra kubernetes
-git clone "https://gitlab.com/snotra.cloud/kubernetes.git" /opt/snotra_kubernetes
-python3 -m venv /opt/snotra_kubernetes/venv
-/opt/gcp-iam-brute/venv/bin/pip install --no-cache-dir -r /opt/snotra_kubernetes/requirements.txt
-echo "alias snotra_kubernetes=\"/opt/snotra_kubernetes/venv/bin/python /opt/snotra_kubernetes/snorta.py\"" >> /root/.bashrc.d/snotra.rc
 
 # binaries
 wget -q https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64 -O /opt/kerbrute && \
@@ -445,4 +258,4 @@ wget -q https://github.com/antonioCoco/RunasCs/releases/download/v1.5/RunasCs.zi
 gem install haiti-hash
 
 # Nuclei Update
-/home/linuxbrew/.linuxbrew/bin/nuclei -ut
+nuclei -ut
