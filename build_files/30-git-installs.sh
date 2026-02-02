@@ -2,6 +2,11 @@
 
 set -eoux pipefail
 
+# Testssl
+git clone --depth 1 https://github.com/testssl/testssl.sh.git --branch 3.3dev /opt/testssl
+chmod+x /opt/testssl/testssl.sh
+echo "alias testssl=\"/opt/testssl/testssl.sh\"" > .bashrc.d/testssl.rc
+
 # pip2
 wget -q https://bootstrap.pypa.io/pip/2.7/get-pip.py
 python2 get-pip.py
