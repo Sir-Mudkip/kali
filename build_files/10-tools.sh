@@ -17,6 +17,6 @@ update-locale LANG=en_GB.UTF-8
 touch ~/.hushlogin
 
 # Ignore case on tab completion
-echo "set completion ignore-case On" >> /etc/inputrc
+echo "set completion-ignore-case On" >> /etc/inputrc
 
 /build_files/30-git-installs.sh
