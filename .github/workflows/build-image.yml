@@ -17,8 +17,8 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  IMAGE_NAME: kali
-  IMAGE_TAG: stable
+  IMAGE_NAME: kali-base
+  IMAGE_TAG: latest
 
 
 jobs:
