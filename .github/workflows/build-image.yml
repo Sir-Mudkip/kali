@@ -1,0 +1,66 @@
+name: build-image
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation
+on:  
+  push:
+    branches:
+      - master
+    paths:  # This needs to be indented under 'push', not at the same level as 'push'
+      - 'Containerfile'
+      - '.github/workflows/build-image.yml'
+  schedule:
+    - cron: '0 0 1 * *'
+
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  IMAGE_NAME: kali
+  IMAGE_TAG: stable
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Extract metadata (tags, labels) for Docker
+      # https://github.com/docker/metadata-action
+      - name: Extract Image metadata
+        id: meta
+        run: |
+          echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+          echo "image=${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}" >> $GITHUB_OUTPUT
+      - name: Build and push image
+        run: |
+          podman build \
+            -t ${{ steps.meta.outputs.image }} \
+            -t ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ steps.meta.outputs.date }} \
+            -f Containerfile .
+      - name: Push image to GitHub Container Registry
+        run: |
+          podman push ${{ steps.meta.outputs.image }}
+          podman push ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ steps.meta.outputs.date }}
+
+      - name: Image details
+        run: |
+          echo "Image pushed successfully!"
+          echo "Image: ${{ steps.meta.outputs.image }}"
+          echo "Tagged as: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ steps.meta.outputs.date }}"
