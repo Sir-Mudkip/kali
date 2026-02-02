@@ -27,4 +27,4 @@ RUN --mount=type=cache,dst=/var/cache \
     /build_files/60-update-and-clean.sh
 
 WORKDIR /root
-CMD /sbin/init
+CMD /bin/bash
