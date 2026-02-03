@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'Containerfile'
-      - 'Dockerfile'
-      - '.github/workflows/build-image.yml'
   pull_request:
     branches:
       - master
