@@ -1,18 +1,20 @@
 ## Overview
 
-This is a Kali container with tools I use daily when pentesting. This is designed to be a disposable container you can spin up and spin down when you want to do quick tasks. A more longstanding and systemd supported container is in dev which will also contain cloud tools.
-
-I have made this image as a base image which can be built upon for your own purposes. You can do this in a Containerfile with:
-```Dockerfile
-FROM ghcr.io/sir-mudkip/kali:base AS base
-```
+This is a Kali container with tools I use daily when pentesting - built monthly. This is designed to be a disposable container you can spin up and spin down when you want to do quick tasks. A more longstanding and systemd supported container is in dev which will also contain cloud tools.
 
 ### Install:
 
 ```bash
-sudo podman pull ghcr.io/sir-mudkip/kali:base
+sudo podman pull ghcr.io/sir-mudkip/kali-base:latest
 ```
 If using docker then replace podman with docker. Both work as they are OCI compliant.
+
+### Using in your own Containerfile:
+
+I have made this as a base image which can be built upon for your own purposes. You can do this in a Containerfile with:
+```Dockerfile
+FROM ghcr.io/sir-mudkip/kali-base:latest AS base
+```
 
 ### Alias:
 
@@ -26,7 +28,7 @@ kali() {
     --network host \
     --privileged \
     -v $HOME:/run/host \
-    ghcr.io/sir-mudkip/kali:base
+    ghcr.io/sir-mudkip/kali-base:latest
 }
 ```
 
@@ -44,18 +46,19 @@ I don't recommend using hashcat in this container as it's already quite big. I h
 
 ### Systemd Services:
 
-msfconsole and other systemd services like docker, apache, etc, don't work in this image per se as there's issues with containers and systemctl when the cmd that builds the container is /bin/bash. Stuff like msfvenom as a utility will work, but I don't recommend using this container to run these things. As I said at the top, systemd is a work in progress right now and will likely be in a dedicated cloud image.  
-
+Systemd services like metasploit, docker, apache, etc, don't work in this image per se as containers not build with /sbin/init will not enable systemd usage. Stuff like msfvenom as a utility will work perfectly fine for when you need it. As I said at the top, systemd is a work in progress right now and will likely be in a dedicated cloud image or image where the container takes properties from a VM - for me that would be working onsite on a customer project and I would need to lean on msfdb.
 
 ### Credit:
 
-I did not build the structure to this container file. The credit must go to my colleague and cloud hacking guru ["Shaunography"](https://gitlab.com/shaunography), creator of Snotra. Please find the links below:
+[Finpilot](https://github.com/projectbluefin/finpilot/tree/main) for the for ideas of how to structure the container as multi-build. More changes will likely be on the way to optimise the Containerfile, but this will suffice for now.
+
+Inspiration and credit must go to cloud hacking guru ["Shaunography"](https://gitlab.com/shaunography), creator of Snotra. Please find the links below:
 
 - https://snotra.uk/
 - https://gitlab.com/snotra.uk
 - https://gitlab.com/snotra.cloud
 
-The creater of Snotra has also got a containers which you can pull down for metasploit, OR you can dockerise it yourself from the Rapid7 github (I'd suggest the former due to the aliases provided):
+He has also got a containers which you can pull down for metasploit, OR you can dockerise it yourself from the Rapid7 github (I'd suggest the former due to the aliases provided):
 
 - https://gitlab.com/snotra.uk/containers/metasploit-framework/-/tree/master?ref_type=heads
 - https://github.com/rapid7/metasploit-framework/blob/master/Dockerfile
