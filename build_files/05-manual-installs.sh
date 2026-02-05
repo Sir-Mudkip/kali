@@ -270,8 +270,8 @@ wget -q https://github.com/antonioCoco/RunasCs/releases/download/v1.5/RunasCs.zi
 gem install haiti-hash
 
 # AAD Internals
-pwsh -c "Install-Module -Name "AADInternals""
-pwsh -c "Install-Module -Name "AADInternals-Endpoints""
+pwsh -c "Install-Module -Name "AADInternals" -Force"
+pwsh -c "Install-Module -Name "AADInternals-Endpoints" -Force"
 
 # Nuclei Update
 nuclei -ut
