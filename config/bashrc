@@ -103,13 +103,14 @@ if [ -t 0 ]; then
     source /etc/profile.d/bash-color-prompt.sh
 fi
 
+## git
+function prompt_command {
+    ref=$(/usr/bin/git rev-parse --abbrev-ref HEAD 2> /dev/null)
+    git_branch=${ref:+:$ref}
+}
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-
+PROMPT_COMMAND=prompt_command
+PROMPT_END='${git_branch@P}]'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -124,6 +125,11 @@ fi
 
 # fzf
 eval "$(fzf --bash)"
+
+# vim mode
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
 
 ## Nvim Variable
 export NVIM_APPNAME="nvim"

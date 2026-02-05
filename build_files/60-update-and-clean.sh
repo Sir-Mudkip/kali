@@ -65,12 +65,6 @@ echo "  ✓ Logs cleaned"
 # =============================================================================
 echo "[6/6] Cleaning build tool caches..."
 
-# Homebrew cache
-if command -v brew &> /dev/null; then
-    brew cleanup --prune=all 2>/dev/null || true
-fi
-rm -rf /home/linuxbrew/.cache 2>/dev/null || true
-
 # Pip download cache (NOT installed packages or bytecode)
 rm -rf /root/.cache/pip 2>/dev/null || true
 rm -rf /home/*/.cache/pip 2>/dev/null || true

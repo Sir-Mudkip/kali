@@ -236,31 +236,42 @@ git clone "https://github.com/uniQuk/caReports" /opt/caReports
 # CAPs
 git clone "https://github.com/techBrandon/CAPs" /opt/CAPs
 
-# binaries
+# Kerbrute
 wget -q https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64 -O /opt/kerbrute && \
 install -o root -g root -m 0755 /opt/kerbrute /usr/local/bin/kerbrute
 
+# Windap Search
 wget -q https://github.com/ropnop/go-windapsearch/releases/download/v0.3.0/windapsearch-linux-amd64 -O /opt/windapsearch && \
 install -o root -g root -m 0755 /opt/windapsearch /usr/local/bin/windapsearch
 
+# Gowitness
 wget -q https://github.com/sensepost/gowitness/releases/download/2.5.1/gowitness-2.5.1-linux-amd64 -O /opt/gowitness && \
 install -o root -g root -m 0755 /opt/gowitness /usr/local/bin/gowitness
 
+# Nextnet
 wget -q https://github.com/hdm/nextnet/releases/download/v0.0.2/nextnet_0.0.2_linux_amd64.tar.gz -O /opt/nextnet_0.0.2_linux_amd64.tar.gz
 
+# Traitor
 wget -q https://github.com/liamg/traitor/releases/download/v0.0.14/traitor-amd64 -O /opt/traitor && \
 install -o root -g root -m 0755 /opt/traitor /usr/local/bin/traitor
 
+# Ldapnomnom
 wget -q https://github.com/lkarlslund/ldapnomnom/releases/download/v1.3.0/ldapnomnom-linux-x64 -O /opt/ldapnomnom && \
 install -o root -g root -m 0755 /opt/ldapnomnom /usr/local/bin/ldapnomnom
 
+# WPProbe
 wget -q https://github.com/Chocapikk/wpprobe/releases/download/v0.8.0/wpprobe_v0.8.0_linux_amd64 -O /opt/wpprobe && \
 install -o root -g root -m 0755 /opt/wpprobe /usr/local/bin/wpprobe
 
+# RunasCs
 wget -q https://github.com/antonioCoco/RunasCs/releases/download/v1.5/RunasCs.zip -O /opt/RunasCs.zip
 
 # Haiti Hash
 gem install haiti-hash
+
+# AAD Internals
+pwsh -c "Install-Module -Name "AADInternals""
+pwsh -c "Install-Module -Name "AADInternals-Endpoints""
 
 # Nuclei Update
 nuclei -ut

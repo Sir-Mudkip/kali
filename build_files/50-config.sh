@@ -2,12 +2,6 @@
 
 set -eoux pipefail
 
-# Tools Packages
-apt update && apt upgrade -y
-DEBIAN_FRONTEND=noninteractive apt -y install \
-    $(cat /build_files/tools | xargs)
-rm -rd /var/lib/apt/lists/*
-
 # Locales
 sed -i -e 's/# en_GB.UTF-8 UTF-8/en_GB.UTF-8 UTF-8/' /etc/locale.gen && \
 dpkg-reconfigure --frontend=noninteractive locales && \
@@ -18,5 +12,3 @@ touch ~/.hushlogin
 
 # Ignore case on tab completion
 echo "set completion-ignore-case On" >> /etc/inputrc
-
-/build_files/30-git-installs.sh
