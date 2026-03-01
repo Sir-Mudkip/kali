@@ -29,22 +29,3 @@ vim.cmd "set path+=**"
 vim.opt.wrap = true           -- Visual wrapping at window edge
 vim.opt.linebreak = true      -- Break at words
 vim.opt.breakindent = true    -- Maintain indent on wrapped lines
-
--- Filetype-specific: Hard wrapping for text/markdown files
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'markdown', 'text', 'gitcommit' },
-  callback = function()
-    vim.opt_local.textwidth = 100      -- Hard wrap at 100 chars
-    vim.opt_local.formatoptions = 't'  -- Auto-wrap when typing
-    vim.opt_local.colorcolumn = "120"  -- Visual guide at wrap point
-  end
-})
-
--- Optional: Disable hard wrap for code files
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'lua', 'python', 'javascript', 'typescript' },
-  callback = function()
-    vim.opt_local.textwidth = 0        -- No hard wrapping
-    vim.opt_local.colorcolumn = "1000000000000"  -- But still show guide
-  end
-})
