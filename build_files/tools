@@ -154,6 +154,7 @@ sqlmap
 sshfs
 sshuttle
 sslscan
+strongswan
 swaks
 tcpdump
 telnet
