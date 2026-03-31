@@ -90,8 +90,6 @@ install -o root -g root -m 0755 /opt/impacket/venv/bin/netview.py /usr/local/bin
 install -o root -g root -m 0755 /opt/impacket/venv/bin/ntfs-read.py /usr/local/bin/ntfs-read
 install -o root -g root -m 0755 /opt/impacket/venv/bin/ntlmrelayx.py /usr/local/bin/ntlmrelayx
 install -o root -g root -m 0755 /opt/impacket/venv/bin/owneredit.py /usr/local/bin/owneredit
-install -o root -g root -m 0755 /opt/impacket/venv/bin/ping6.py /usr/local/bin/ping6
-install -o root -g root -m 0755 /opt/impacket/venv/bin/ping.py /usr/local/bin/ping
 install -o root -g root -m 0755 /opt/impacket/venv/bin/psexec.py /usr/local/bin/psexec
 install -o root -g root -m 0755 /opt/impacket/venv/bin/raiseChild.py /usr/local/bin/raiseChild
 install -o root -g root -m 0755 /opt/impacket/venv/bin/rbcd.py /usr/local/bin/rbcd

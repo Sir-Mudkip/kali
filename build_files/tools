@@ -7,7 +7,6 @@ arp-scan
 bettercap
 binwalk
 bloodhound-ce-python
-bloodhound.py
 bruteshark
 bsdmainutils
 build-essential
@@ -37,7 +36,6 @@ enum4linux
 evil-ssdp
 evil-winrm
 exploitdb
-eyewitness
 ffuf
 file
 finger
@@ -125,7 +123,6 @@ psmisc
 pwncat
 python2
 python3
-python3-impacket
 python3-ldapdomaindump
 python3-lsassy
 python3-pip
