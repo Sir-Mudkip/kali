@@ -214,12 +214,12 @@ echo "alias jexboss=\"python3 /opt/jexboss/jexboss.py\"" > /root/.bashrc.d/jexbo
 git clone https://github.com/ticarpi/jwt_tool /opt/jwt_tool
 python3 -m venv /opt/jwt_tool/venv
 /opt/jwt_tool/venv/bin/pip install --no-cache-dir -r /opt/jwt_tool/requirements.txt
-echo "alias jwt_tool=\"python3 /opt/jwt_tool/jwt_tool.py\"" > /root/.bashrc.d/jwt_tool.rc
+echo "alias jwt_tool=\"/opt/jwt_tool/venv/bin/python3 /opt/jwt_tool/jwt_tool.py\"" > /root/.bashrc.d/jwt_tool.rc
 
 # Linkedin Dumper
 git clone https://github.com/l4rm4nd/LinkedInDumper /opt/linkedin-dumper
 python3 -m venv /opt/linkedin-dumper/venv
-/opt/linkedin-dumper/venv/bin/pip install --no-cache-dir --no-cache-dir -r /opt/linkedin-dumper/requirements.txt
+/opt/linkedin-dumper/venv/bin/pip install --no-cache-dir -r /opt/linkedin-dumper/requirements.txt
 echo "alias linkedin-dumper=\"/opt/linkedin-dumper/venv/bin/python /opt/linkedin-dumper/linkedindumper.py\"" > /root/.bashrc.d/linkedin-dumper.rc
 
 # NoPrompt
