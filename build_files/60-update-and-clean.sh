@@ -5,7 +5,7 @@
 set -ouex pipefail
 
 echo "======================================================"
-echo " Updating Container - Ensure APT and Brew are updated "
+echo " Updating Container - Ensure APT is updated "
 echo "======================================================"
 apt update && apt upgrade -y
 
@@ -18,11 +18,6 @@ apt-get clean
 apt-get autoclean
 apt-get autoremove -y --purge
 
-rm -rf /var/lib/apt/lists/*
-rm -rf /var/cache/apt/archives/*
-rm -rf /var/cache/apt/*.bin
-
-echo "Package manager caches cleaned"
 
 # =============================================================================
 # TEMPORARY FILES

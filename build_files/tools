@@ -51,7 +51,6 @@ gobuster
 golang
 gpg
 groff-base
-hashid
 hcxdumptool
 hcxtools
 heimdal-clients
@@ -135,7 +134,6 @@ redis-tools
 recon-ng
 responder
 ridenum
-ripgrep
 rlwrap
 rpcbind
 rsync
