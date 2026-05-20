@@ -7,6 +7,11 @@ git clone --depth 1 https://github.com/testssl/testssl.sh.git --branch 3.3dev /o
 chmod +x /opt/testssl/testssl.sh
 echo "alias testssl=\"/opt/testssl/testssl.sh\"" > /root/.bashrc.d/testssl.rc
 
+# bloodhound cli
+wget "https://github.com/SpecterOps/bloodhound-cli/releases/download/v0.2.1/bloodhound-cli-linux-amd64.tar.gz" -O "/opt/bloodhound-cli-linux-amd64.tar.gz"
+tar -xzf "/opt/bloodhound-cli-linux-amd64.tar.gz" -C /opt/
+rm "/opt/bloodhound-cli-linux-amd64.tar.gz"
+
 # pip2
 wget -q https://bootstrap.pypa.io/pip/2.7/get-pip.py
 python2 get-pip.py
@@ -266,6 +271,9 @@ wget -q https://github.com/antonioCoco/RunasCs/releases/download/v1.5/RunasCs.zi
 
 # Haiti Hash
 gem install haiti-hash
+
+# brutespray
+go install github.com/x90skysn3k/brutespray@latest
 
 # AAD Internals
 pwsh -c "Install-Module -Name "AADInternals" -Force"
