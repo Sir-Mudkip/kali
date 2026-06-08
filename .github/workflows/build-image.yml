@@ -28,15 +28,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Log into ghcr.io
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3
 
       - name: Set image reference
         id: meta
@@ -50,6 +51,16 @@ jobs:
           podman build -t ${{ steps.meta.outputs.image }} .
 
       - name: Push image
+        id: push
         if: github.event_name != 'pull_request'
         run: |
-          podman push ${{ steps.meta.outputs.image }}
+          podman push --digestfile=/tmp/digest ${{ steps.meta.outputs.image }}
+          image="${{ steps.meta.outputs.image }}"
+          echo "ref=${image%:*}@$(cat /tmp/digest)" >> $GITHUB_OUTPUT
+
+      - name: Sign image (keyless)
+        if: github.event_name != 'pull_request'
+        env:
+          COSIGN_YES: "true"
+        run: |
+          cosign sign --yes ${{ steps.push.outputs.ref }}
