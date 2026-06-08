@@ -2,6 +2,11 @@
 
 set -eoux pipefail
 
+# Testssl
+git clone --depth 1 https://github.com/testssl/testssl.sh.git --branch 3.3dev /opt/testssl
+chmod +x /opt/testssl/testssl.sh
+echo "alias testssl=\"/opt/testssl/testssl.sh\"" > /root/.bashrc.d/testssl.rc
+
 # bloodhound cli
 wget "https://github.com/SpecterOps/bloodhound-cli/releases/download/v0.2.1/bloodhound-cli-linux-amd64.tar.gz" -O "/opt/bloodhound-cli-linux-amd64.tar.gz"
 tar -xzf "/opt/bloodhound-cli-linux-amd64.tar.gz" -C /opt/
@@ -141,6 +146,18 @@ python3 -m venv /opt/sharefiltrator/venv
 /opt/sharefiltrator/venv/bin/pip install --no-cache-dir -r /opt/sharefiltrator/requirements.txt
 echo "alias sharefiltrator=\"/opt/sharefiltrator/venv/bin/python /opt/sharefiltrator/sharefiltrator.py\"" > /root/.bashrc.d/sharefiltrator.rc
 
+# Linkedin Dumper
+git clone https://github.com/l4rm4nd/LinkedInDumper /opt/linkedin-dumper
+python3 -m venv /opt/linkedin-dumper/venv
+/opt/linkedin-dumper/venv/bin/pip install --no-cache-dir -r /opt/linkedin-dumper/requirements.txt
+echo "alias linkedin-dumper=\"/opt/linkedin-dumper/venv/bin/python /opt/linkedin-dumper/linkedindumper.py\"" > /root/.bashrc.d/linkedin-dumper.rc
+
+# NoPrompt
+git clone "https://github.com/NotSoSecure/NoPrompt" /opt/NoPrompt
+python3 -m venv /opt/NoPrompt/venv
+/opt/NoPrompt/venv/bin/pip install --no-cache-dir -r /opt/NoPrompt/requirements.txt
+echo "alias noprompt=\"/opt/NoPrompt/venv/bin/python /opt/NoPrompt/noprompt.py\"" > /root/.bashrc.d/noprompt.rc
+
 # kerbrute
 wget -q https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64 -O /opt/kerbrute
 install -o root -g root -m 0755 /opt/kerbrute /usr/local/bin/kerbrute
@@ -161,3 +178,7 @@ gem install haiti-hash
 wget -q https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz -O /opt/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
 wget -q https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_windows_amd64.zip -O /opt/ligolo-ng_agent_0.8.2_windows_amd64.zip
 
+# Testssl
+git clone --depth 1 https://github.com/testssl/testssl.sh.git --branch 3.3dev /opt/testssl
+chmod +x /opt/testssl/testssl.sh
+echo "alias testssl=\"/opt/testssl/testssl.sh\"" > /root/.bashrc.d/testssl.rc
