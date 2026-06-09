@@ -43,12 +43,4 @@ git clone https://github.com/ropnop/go-windapsearch.git && cd go-windapsearch
 go install github.com/magefile/mage@latest
 /root/go/bin/mage build
 install -o root -g root -m 0755 windapsearch /usr/local/bin/windapsearch
-
-# john the ripper (bleeding-jumbo)
-git clone --depth 1 https://github.com/openwall/john -b bleeding-jumbo /opt/john
-cd /opt/john/src
-/opt/john/src/configure
-make -s clean
-make -sj4
-mv /opt/john/run /opt/john-the-ripper
-rm -rf /opt/john
+n
