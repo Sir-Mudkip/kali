@@ -43,4 +43,3 @@ git clone https://github.com/ropnop/go-windapsearch.git && cd go-windapsearch
 go install github.com/magefile/mage@latest
 /root/go/bin/mage build
 install -o root -g root -m 0755 windapsearch /usr/local/bin/windapsearch
-n
