@@ -55,7 +55,6 @@ COPY --from=builder /usr/local/bin/nuclei /usr/local/bin/nuclei
 COPY --from=builder /usr/local/bin/ldapnomnom /usr/local/bin/ldapnomnom
 COPY --from=builder /usr/local/bin/traitor /usr/local/bin/traitor
 COPY --from=builder /usr/local/bin/windapsearch /usr/local/bin/windapsearch
-COPY --from=builder /opt/john-the-ripper /opt/john-the-ripper
 
 # pre-fetch nuclei templates now that the nuclei binary is in place
 RUN --mount=type=tmpfs,dst=/tmp nuclei -ut

@@ -17,7 +17,7 @@ wget -q https://bootstrap.pypa.io/pip/2.7/get-pip.py
 python2 get-pip.py
 rm get-pip.py
 
-# john the ripper, brutespray, gowitness, wpprobe, gobuster, nuclei: compiled in the builder stage (see build/00-go-installs.sh)
+# brutespray, gowitness, wpprobe, gobuster, nuclei: compiled in the builder stage (see build/00-go-installs.sh)
 
 cd /opt/
 # seth
@@ -178,7 +178,6 @@ gem install haiti-hash
 wget -q https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz -O /opt/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
 wget -q https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_windows_amd64.zip -O /opt/ligolo-ng_agent_0.8.2_windows_amd64.zip
 
-# Testssl
-git clone --depth 1 https://github.com/testssl/testssl.sh.git --branch 3.3dev /opt/testssl
-chmod +x /opt/testssl/testssl.sh
-echo "alias testssl=\"/opt/testssl/testssl.sh\"" > /root/.bashrc.d/testssl.rc
+# AAD Internals
+pwsh -c "Install-Module -Name AADInternals -Force"
+pwsh -c "Install-Module -Name AADInternals-Endpoints -Force"
