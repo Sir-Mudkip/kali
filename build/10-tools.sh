@@ -27,7 +27,6 @@ PACKAGES=(
     crunch
     curl
     default-mysql-client
-    dirb
     dnschef
     dnsrecon
     dnsutils
@@ -94,6 +93,7 @@ PACKAGES=(
     ncat
     neovim
     netdiscover
+    netexec
     net-tools
     nfs-common
     nikto
@@ -168,7 +168,6 @@ PACKAGES=(
     trufflehog
     tshark
     unzip
-    wfuzz
     wget2
     wifiphisher
     wifite
