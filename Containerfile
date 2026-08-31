@@ -59,5 +59,8 @@ COPY --from=builder /usr/local/bin/windapsearch /usr/local/bin/windapsearch
 # pre-fetch nuclei templates now that the nuclei binary is in place
 RUN --mount=type=tmpfs,dst=/tmp nuclei -ut
 
+# Update
+RUN apt update && apt upgrade -y && apt autoremove
+
 WORKDIR /root
 CMD /bin/bash
