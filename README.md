@@ -35,7 +35,7 @@ kali() {
 - If using docker, replace the podman command with docker
 - `--security-opt` is the required if SELinux is enabled
 - `--privileged` is for low level network access
-- `--netowork host` for catching shells
+- `--network host` for catching shells
 - You can update the mount to your desired directory.
 
 > [!NOTE]
