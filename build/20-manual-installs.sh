@@ -2,13 +2,16 @@
 
 set -eoux pipefail
 
+source /build/helper_functions
+
 # Testssl
 git clone --depth 1 https://github.com/testssl/testssl.sh.git --branch 3.3dev /opt/testssl
 chmod +x /opt/testssl/testssl.sh
 echo "alias testssl=\"/opt/testssl/testssl.sh\"" > /root/.bashrc.d/testssl.rc
 
 # bloodhound cli
-wget "https://github.com/SpecterOps/bloodhound-cli/releases/download/v0.2.1/bloodhound-cli-linux-amd64.tar.gz" -O "/opt/bloodhound-cli-linux-amd64.tar.gz"
+BLOODHOUND_CLI_VERSION=$(curl_latest_release SpecterOps/bloodhound-cli)
+wget "https://github.com/SpecterOps/bloodhound-cli/releases/download/${BLOODHOUND_CLI_VERSION}/bloodhound-cli-linux-amd64.tar.gz" -O "/opt/bloodhound-cli-linux-amd64.tar.gz"
 tar -xzf "/opt/bloodhound-cli-linux-amd64.tar.gz" -C /opt/
 rm "/opt/bloodhound-cli-linux-amd64.tar.gz"
 
@@ -156,25 +159,39 @@ python3 -m venv /opt/NoPrompt/venv
 echo "alias noprompt=\"/opt/NoPrompt/venv/bin/python /opt/NoPrompt/noprompt.py\"" > /root/.bashrc.d/noprompt.rc
 
 # kerbrute
-wget -q https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64 -O /opt/kerbrute
+KERBRUTE_VERSION=$(curl_latest_release ropnop/kerbrute)
+wget -q "https://github.com/ropnop/kerbrute/releases/download/${KERBRUTE_VERSION}/kerbrute_linux_amd64" -O /opt/kerbrute
 install -o root -g root -m 0755 /opt/kerbrute /usr/local/bin/kerbrute
 rm /opt/kerbrute
 
-wget -q https://github.com/hdm/nextnet/releases/download/v0.0.2/nextnet_0.0.2_linux_amd64.tar.gz -O /opt/nextnet_0.0.2_linux_amd64.tar.gz
-
-wget -q https://github.com/lima-vm/sshocker/releases/download/v0.3.9/sshocker-Linux-x86_64 -O /opt/sshocker
+# Sshocker
+SSHOCKER_VERSION=$(curl_latest_release lima-vm/sshocker)
+wget -q "https://github.com/lima-vm/sshocker/releases/download/${SSHOCKER_VERSION}/sshocker-Linux-x86_64" -O /opt/sshocker
 install -o root -g root -m 0755 /opt/sshocker /usr/local/bin/sshocker
 rm /opt/sshocker
 
-wget -q https://github.com/antonioCoco/RunasCs/releases/download/v1.5/RunasCs.zip -O /opt/RunasCs.zip
+# RunasCs
+RUNASCS_VERSION=$(curl_latest_release antonioCoco/RunasCs)
+wget -q "https://github.com/antonioCoco/RunasCs/releases/download/${RUNASCS_VERSION}/RunasCs.zip" -O /opt/RunasCs.zip
 
 # haiti hash
 gem install haiti-hash
 
 # ligolo agent binaries
-wget -q https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz -O /opt/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
-wget -q https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_windows_amd64.zip -O /opt/ligolo-ng_agent_0.8.2_windows_amd64.zip
+LIGOLO_NG_VERSION=$(curl_latest_release nicocha30/ligolo-ng)
+LIGOLO_NG_VERSION_NUM="${LIGOLO_NG_VERSION#v}"
+wget -q "https://github.com/nicocha30/ligolo-ng/releases/download/${LIGOLO_NG_VERSION}/ligolo-ng_agent_${LIGOLO_NG_VERSION_NUM}_linux_amd64.tar.gz" -O "/opt/ligolo-ng_agent_${LIGOLO_NG_VERSION_NUM}_linux_amd64.tar.gz"
+wget -q "https://github.com/nicocha30/ligolo-ng/releases/download/${LIGOLO_NG_VERSION}/ligolo-ng_agent_${LIGOLO_NG_VERSION_NUM}_windows_amd64.zip" -O "/opt/ligolo-ng_agent_${LIGOLO_NG_VERSION_NUM}_windows_amd64.zip"
+
+# Titus
+TITUS_VERSION=$(curl_latest_release praetorian-inc/titus)
+wget -q "https://github.com/praetorian-inc/titus/releases/download/${TITUS_VERSION}/titus-linux-amd64" -O /opt/titus
+install -o root -g root -m 0755 /opt/titus /usr/local/bin/titus
+rm /opt/titus
 
 # AAD Internals
 pwsh -c "Install-Module -Name AADInternals -Force"
 pwsh -c "Install-Module -Name AADInternals-Endpoints -Force"
+
+# Python Upload Server
+pipx install uploadserver

@@ -165,7 +165,6 @@ PACKAGES=(
     tnftp
     tnscmd10g
     tree
-    trufflehog
     tshark
     unzip
     wget2

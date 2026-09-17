@@ -44,3 +44,7 @@ Compiled tools (`brutespray`, `gowitness`, `wpprobe`, `gobuster`, `nuclei`, John
 
 Keep cleanup inline (remove tarballs/zip/clone leftovers after install) since each build script runs as one cached layer.
 
+## Rules to be followed
+
+- **Machine Cleanup ->** No one likes a guest coming to their house and turning it into a landfill site. The same approach applies to the machine you're working with. **Keep an inventory of any scripts you made, or tools you downloaded, and remove them from the system**. If you pull any container images, you remove them. The state of the machine should be the same as when you first started work on it. 
+- **NEVER Delete Personal Files ->** You're NEVER are allowed to delete personal files from other parts of the system unless you explicitly authorised to. This mainly applies to files **outside your current working directory**.

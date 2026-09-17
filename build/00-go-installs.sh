@@ -38,6 +38,10 @@ install -o root -g root -m 0755 /root/go/bin/ldapnomnom /usr/local/bin/ldapnomno
 go install github.com/liamg/traitor/cmd/traitor@latest
 install -o root -g root -m 0755 /root/go/bin/traitor /usr/local/bin/traitor
 
+# Nextnet
+go install github.com/hdm/nextnet@latest
+install -o root -g root -m 0755 /root/go/bin/nextnet /usr/local/bin/nextnet
+
 # go-windapsearch
 git clone https://github.com/ropnop/go-windapsearch.git && cd go-windapsearch
 go install github.com/magefile/mage@latest
