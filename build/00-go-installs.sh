@@ -2,9 +2,11 @@
 
 set -eoux pipefail
 
-# Builder stage only (see Containerfile): compile the Go tools and John the
-# Ripper here. The final image copies just the resulting binaries via
-# COPY --from=builder, so the golang toolchain and build leftovers never ship.
+# Builder stage only (see Containerfile): compile the Go tools here. The final
+# image copies just the resulting binaries via COPY --from=builder, so the
+# golang toolchain and build leftovers never ship. Every binary installed here
+# needs a matching COPY --from=builder line in the Containerfile, or it is
+# built and then silently discarded (see docs/architecture.md).
 
 apt update
 DEBIAN_FRONTEND=noninteractive apt -y install \
@@ -25,6 +27,10 @@ install -o root -g root -m 0755 /root/go/bin/wpprobe /usr/local/bin/wpprobe
 # gobuster
 go install github.com/OJ/gobuster/v3@latest
 install -o root -g root -m 0755 /root/go/bin/gobuster /usr/local/bin/gobuster
+
+# ffuf
+go install -v -ldflags="-s -w" github.com/ffuf/ffuf/v2@latest
+install -o root -g root -m 0755 /root/go/bin/ffuf /usr/local/bin/ffuf
 
 # nuclei
 go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest

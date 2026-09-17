@@ -51,9 +51,11 @@ COPY --from=builder /usr/local/bin/brutespray /usr/local/bin/brutespray
 COPY --from=builder /usr/local/bin/gowitness /usr/local/bin/gowitness
 COPY --from=builder /usr/local/bin/wpprobe /usr/local/bin/wpprobe
 COPY --from=builder /usr/local/bin/gobuster /usr/local/bin/gobuster
+COPY --from=builder /usr/local/bin/ffuf /usr/local/bin/ffuf
 COPY --from=builder /usr/local/bin/nuclei /usr/local/bin/nuclei
 COPY --from=builder /usr/local/bin/ldapnomnom /usr/local/bin/ldapnomnom
 COPY --from=builder /usr/local/bin/traitor /usr/local/bin/traitor
+COPY --from=builder /usr/local/bin/nextnet /usr/local/bin/nextnet
 COPY --from=builder /usr/local/bin/windapsearch /usr/local/bin/windapsearch
 
 # pre-fetch nuclei templates now that the nuclei binary is in place

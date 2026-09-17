@@ -39,7 +39,6 @@ PACKAGES=(
     evil-ssdp
     evil-winrm
     exploitdb
-    ffuf
     file
     finger
     fping
