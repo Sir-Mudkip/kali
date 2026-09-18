@@ -125,6 +125,47 @@ runner's free disk, so it is a correctness risk as well as a slow one.
 chunkah's own README calls this out, recommending `--output oci:PATH` plus
 `skopeo copy` to get the same result without the tar/untar round trip.
 
+### Measured results
+
+Run on 2026-09-18 (GitHub `ubuntu-latest`, podman 4.9.3, chunkah v0.6.0):
+
+| Setup | Build | Rechunk | Push | Layers | Largest layers (MiB) |
+|---|---|---|---|---|---|
+| `\| podman load` (original) | 24m | 56m+, cancelled | — | — | — |
+| OCI + skopeo, 64 layers | 31m | 8m22s | 4m10s | 64 | 1601, 204, 200 |
+| OCI + skopeo, 120 layers | 23m | 3m29s | 6m15s | 120 | 1601, 120, 111 |
+
+Total compressed size is 5.15 GiB in both OCI runs; only the split
+changes. Build time varies by several minutes between runs from runner
+noise alone, so compare rechunk and push times, not build.
+
+chunkah's own analysis of this image: 447,171 files (14.4 GiB), of which
+1,286 large files (9.5 GiB) become their own components and the remaining
+445,876 files (4.9 GiB, 99.7% of all files) form a single "unclaimed"
+component. That component is the 1,601 MiB layer, about 30% of the image.
+
+### Known limitation: the unclaimed-files layer
+
+chunkah only builds components from RPM and pacman (ALPM) package
+databases, plus `user.component` xattrs. It does **not** read dpkg, so on
+this Debian-based image it can't tell which package a file belongs to.
+Everything except large standalone files lands in one "unclaimed"
+component, and a component can't be split across layers.
+
+That component becomes the single largest layer, and it changes on
+essentially every weekly build (`apt upgrade`, pipx, git clones all touch
+it), so users re-download it every week no matter what `--max-layers`
+is set to.
+
+The likely fix is to set `user.component` xattrs from dpkg's file lists
+(`/var/lib/dpkg/info/*.list`), plus one component per `/opt/<tool>` and
+pipx venv, so unchanged packages keep identical layers. This is
+**not implemented or prototyped yet**. One constraint to design around:
+setting an xattr on a file from an earlier layer makes overlayfs copy the
+whole file up, so tagging in a final `RUN` would roughly double the
+pre-chunk image on the runner's disk. The tagging would need to happen on
+a writable view of the image at rechunk time instead.
+
 ### Runner podman version constraints — read before editing this step
 
 The GitHub `ubuntu-latest` runner ships **podman 4.9.3**, which is
